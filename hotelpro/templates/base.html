@@ -1,0 +1,44 @@
+{% load static %}
+<html>
+    <head><title>Hotel Nakshatra GrandGrand</title></head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .footernav{position: fixed;
+                    bottom: 0;
+                    width: 100%}
+    </style>
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/">
+    <img src="{% static 'images\hotelnakshatralogo.png' %}" alt="logo" style="width:150px;height: 50px;">
+  </a>
+
+  <ul class="navbar-nav" style="float:left;">
+    <li class="nav-item">
+     	<h2 class="text-warning" style="font-family: cursive;margin-top: 5px" >Hotel Nakshatra Grand</h2>
+    </li>
+      <li class="nav-item" style="float: right;">
+     	<a href="cancel/" style="display: block;padding: 5px;margin-left: 300px; width: 100%;">
+            <h2 class=" " style="font-family: 'Times New Roman';float: right;
+              border: 2px solid #ED8646;background-color: white;color: black">Cancel Booking</h2></a>
+    </li>
+  </ul>
+</nav>
+<div class="contaner">
+    {% block content %}
+
+    {% endblock %}
+</div>
+<footer>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark footernav">
+        <h5 class="text-white" style="margin-left: 560px;font-family: cursive"> © Hotel Nakshatra Grand</h5>
+    </nav>
+</footer>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+    <style>
+    .jumbotron{float: left;
+                margin: auto}
+    .inputfields{font-weight: bold; font-family: "Times New Roman";}
+    .jumbotron{background: url("{% static 'images\hotel.jpg' %}") 50% 0 no-repeat fixed;}
+    </style>
+    <img src="{% static 'images\hotel.jpg' %}" style="float: right;width: 100%;height: 85%">
+
+<div class="jumbotron" style="width: 80%;margin-top: -650px;margin-left: 200px;">
+    <div class="jumbotron" style="background: white">
+    <div class="container" style="border: 1px  black  double">
+    {% if boookingid %}
+        <h4 style=" margin-bottom: -2px;font-family: 'Bookman Old Style'" class="text-danger">Confirm Cancellation &emsp; &emsp; &emsp; &emsp;<span class="text-dark">Booking ID : {{ boookingid }}</span></h4>
+    <br>
+        <table width="800px" border="2px"cellpadding="5px">
+            <tbody>
+            {% for i in cancellationdata %}
+            <tr>
+                <td><b>Name : {{ i.name }}</b></td>
+                <td><b>Mobile ID : {{ i.mobile }}</b></td>
+                <td><b>Email ID : {{ i.email }}</b></td>
+                <td><b>BOOKING ID : {{ i.orderid }}</b></td>
+            </tr>
+                <tr>
+                    <td><b>Checkin : {{ i.checkin }}</b></td>
+                    <td><b>Checkout : {{ i.checkout }}</b></td>
+                    <td colspan="2"><b>Booked on : {{ i.date }}</b></td>
+                </tr>
+                <tr>
+                    <td colspan="5"><b>&emsp;&emsp;&emsp;&emsp;&emsp;TOTAL : Rs.{{ i.total }}/-</b></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <form method="POST" action="/cancel/">
+            {% csrf_token %}
+        <table width="800px">
+            <tbody>
+                <tr><td colspan="5"><br>
+                    <input type="checkbox" name="cancelcheckbox" value="agree" checked> I agree to the Terms and Conditions &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    <input type="submit" value="Confirm Cancel" class="btn btn-danger" width="100px"></td>
+                    </tr>
+            </tbody>
+        </table>
+{% elif cancelled %}
+    <div class="jumbotron" style=" border: 2px solid red">
+        <table width="600px">
+            <tbody>
+                <tr>
+                    <td><img src="{%  static 'images\cancleed.jpg' %}" style="width: 50%;">
+                        <h4 class="text-danger">Booking Cancelled Successfully !!</h4></td></tr>
+            </tbody>
+                        <th colspan="3"><b><a href="/"><input type="submit" value="Go Bank To Homepage" class="btn btn-danger font-bold"style="padding: 10px;width: 100%"></a></b></th>
+        </table>
+
+    </div>
+
+    {% else %}
+{% for i in data %}
+
+              {% endfor %}
+    {% if data %}
+        <table width="800px">
+            <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.orderid }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <form method="POST" action="/cancel/">
+            {% csrf_token %}
+        <table width="800px">
+            <tbody>
+            <tr><td><h4>Booking Cancellation</h4></td></tr>
+                <tr><td> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Booking ID :
+                    <input type="number" name="bookingid">&emsp;&emsp;
+                    <input type="submit" value="Get Booking Details" class="btn btn-warning">
+                </td>
+                <td></td></tr>
+                <tr></tr>
+            </tbody>
+        </table>
+
+        {% for i in data %}
+        <center><h6>-------------- Booking Date & Time : {{ i.date }}----------------</h6></center>
+        {% endfor %}
+        </form>
+</div>
+    </div>
+    {% endif %}
+{% endif %}
+{% endblock %}

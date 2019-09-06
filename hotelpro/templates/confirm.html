@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+    <style>
+    .jumbotron{float: left;
+                margin: auto}
+    .inputfields{font-weight: bold; font-family: "Times New Roman";}
+    .jumbotron{background: url("{% static 'images\hotel.jpg' %}") 50% 0 no-repeat fixed;}
+    </style>
+    <img src="{% static 'images\hotel.jpg' %}" style="float: right;width: 100%;height: 85%">
+
+
+<div class="jumbotron" style="width: 80%;margin-top: -650px;margin-left: 200px;">
+    <div class="jumbotron" style="background: white">
+    <div class="container" style="border: 1px  black  double">
+{% for i in data %}
+            <h4 style="margin-bottom: -2px;font-family: 'Bookman Old Style'">Booking Confirmed &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Booking ID : {{ i.orderid }}</h4>
+              {% endfor %}
+        <form method="POST" >
+            {% csrf_token %}
+        <table border="2px" cellpadding="10px">
+            <tbody>
+            {% for i in data %}
+                <tr>
+                    <td class="inputfields">Check-IN : </td>
+                    <td>{{ i.checkin }}</td>
+                    <td class="inputfields">Check-OUT : </td>
+                    <td> &nbsp;{{ i.checkout }}</td>
+                    <td class="inputfields">Room : </td>
+                    <td colspan="5"><b>{{ i.room }}</b></td>
+                    <th rowspan="6">THANK YOU</th>
+                </tr>
+                <tr>
+                <td class="inputfields">Full Name : </td>
+                    <td><b>{{ i.name }}</b></td>
+
+                    <td class="inputfields">Email : </td>
+                    <td>{{ i.email }}</td>
+                    <td class="inputfields">Mobile : </td>
+                    <td>{{ i.mobile }}</td>
+                </tr>
+
+                <tr>
+                    <td class="inputfields"  colspan="3"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Amenties : </td>
+                    <td colspan="3"><b>{{ i.amenties }}</b></td><br>
+                </tr>
+                <tr>
+                    <td colspan="9"><b>  Room: Rs.{% if i.room == 'Ordinary' %}  <span>1500/-</span>
+                        {% elif i.room == 'Deluxe' %}  <span>2500/-</span>
+                        {% else %} <span>5000/-</span>{% endif %}&emsp;&emsp;
+                    Amenties : Rs.{{ i.amentiestotal }}/- &emsp;&emsp;
+                        Promo Discount : -{{ i.promodiscount }}/-
+
+                        <hr><b>Total  Amount: {{ i.total }}/-  </b></b> *Note : Fares Calcuated only for one day,Remain to be paid at Hotel<br></td>
+
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% for i in data %}
+        <center><h6>-------------- Booking Date & Time : {{ i.date }}----------------</h6></center>
+        {% endfor %}
+        </form>
+</div><table width="100%">
+                <tr>
+                    <th colspan="3"><b><a href="/cancel/"><input type="submit" value="Cancel Booking" class="btn btn-danger font-bold"style="padding: 10px;width: 100%"></a></b></th>
+                    <th colspan="2"><b><a href="/"><input type="submit" value="Book Again" class="btn btn-success font-bold"style="padding: 10px;width: 100%"></a></b></th>
+                </tr>
+            </table>
+    </div>
+{% endblock %}

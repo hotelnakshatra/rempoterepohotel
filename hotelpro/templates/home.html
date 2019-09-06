@@ -1,0 +1,75 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+    <style>
+    .jumbotron{float: left;
+                margin: auto}
+    .inputfields{font-weight: bold; font-family: "Times New Roman";}
+    .jumbotron{background: url("{% static 'images\hotel.jpg' %}") 50% 0 no-repeat fixed;}
+    </style>
+    <img src="{% static 'images\hotel.jpg' %}" style="float: right;width: 100%;height: 85%">
+
+<div class="jumbotron" style="width: 80%;margin-top: -650px;margin-left: 200px;">
+    <div class="jumbotron" style="background: white; >
+    <div class="container">
+            <h4 style="margin-bottom: -2px;font-family: 'Bookman Old Style'">Guest Details</h4>
+        <span style="font-family: cursive;margin-top: -10px;">* Please Carry Any Goverment Id proof</span>
+        <br>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+        <table>
+            <tbody>
+                <tr>
+                    <td class="inputfields">Check-IN</td>
+                    <td><input type="date" name="checkin" size="25" autofocus placeholder="Today" id="checkindate"></td>
+                    <td>&emsp;&emsp;&emsp;</td>
+                    <td class="inputfields">Check-OUT</td>
+                    <td><input type="date" name="checkout" size="25" id="chekoutdate"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td class="inputfields">Full Name</td>
+                    <td><input type="text" id="fullname" name="name" size="25" autofocus></td>
+                    <td>&emsp;&emsp;&emsp;</td>
+                    <td class="inputfields">Mobile</td>
+                    <td><input type="number" name="mobile" size="25"></td>
+                </tr>
+                <tr>
+                    <td>&emsp;</td>
+                </tr>
+                <tr>
+                    <td class="inputfields">Email</td>
+                    <td><input type="email" name="email" size="28"></td>
+                    <td>&emsp;&emsp;&emsp;</td>
+                    <td class="inputfields">Promocode</td>
+                    <td><input type="text" name="promo" size="20" placeholder="FIRST50"></td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr >
+                    <td class="inputfields">Room</td>
+                    <td colspan="5"><input type="radio" name="room" value="Ordinary"><b> Ordinary Rs.1500 /- </b>
+                   <input type="radio" name="room" value="Deluxe" checked><b> Deluxe Rs.2500/- </b>
+                        <input type="radio" name="room" value="SuiteRoom"><b> Suite Room Rs.5000/- </b></td>
+                </tr>
+                <tr>
+                    <td class="inputfields" >Amenties</td>
+                    <td><br>
+                    <input type="checkbox" name="amenties1" value="Computer"><b>Computer &nbsp;Rs.1000 /-</b><br>
+                      <input type="checkbox" name="amenties2" value="GYM"><b>GYM &nbsp; Rs.250 /- </b><br>
+                      <input type="checkbox" name="amenties3" value="Breakfast" checked><b>Breakfast &nbsp;Rs.50 /-</b><br>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <th colspan="5"><b><a href="/"><input type="submit" value="Confrim Details & Proceed to Payment" class="btn btn-danger font-bold"style="padding: 10px;width: 100%"></a></b></th>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+</div></div></div>
+{% endblock %}
